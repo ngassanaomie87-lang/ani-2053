@@ -1,0 +1,4 @@
+Liste : MonSuperServeurLAN (127.0.0.1:6000, maxPlayers: 8)
+Apparitions : Le serveur a été découvert 3 fois au cours de la période d'écoute de six secondes, car le Broadcast est émis toutes les deux secondes.
+Pourquoi : La méthode NkDiscovery::Listen collecte les paquets UDP reçus sur le port d'écoute pendant la durée spécifiée (6000 ms). Comme le serveur diffuse son message toutes les 2000 ms, le client intercepte 3 annonces distinctes, ce qui remplit le vecteur de 3 éléments identiques ou successifs selon l'implémentation de la bibliothèque.
+Machines : Essai réalisé sur une seule machine en local, en utilisant l'adresse de bouclage 127.0.0.1 pour simuler à la fois l'émission du serveur et l'écoute du client.

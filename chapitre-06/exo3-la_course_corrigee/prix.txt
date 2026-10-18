@@ -1,0 +1,6 @@
+Sans protection : 7245120 12 ms
+Mutex : 8000000 420 ms
+Atomique : 8000000 85 ms
+Local : 8000000 2 ms
+La moins chère : Local
+Pourquoi : Sans protection ne paie rien en synchronisation mais donne un résultat erroné à cause des conflits de données. Mutex paie le prix fort du verrouillage système à chaque itération, ce qui ralentit considérablement l'exécution. Atomique utilise des instructions processeur spécifiques plus rapides qu'un mutex mais reste pénalisé par la contention sur la même variable partagée. La version locale ne paie aucun coût de synchronisation pendant la boucle car chaque fil travaille sur sa propre variable indépendante, ce qui en fait la plus performante et la moins chère.

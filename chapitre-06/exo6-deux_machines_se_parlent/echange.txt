@@ -1,0 +1,4 @@
+Serveur : Serveur démarré sur le port 7777... Connecte avec le pair ID : 428193746 Reçu de [428193746] : Bonjour du client NKNetwork !
+Client : Client en cours de connexion vers 127.0.0.1... Connecte avec le pair ID : 1
+Pair : L'identifiant (NkPeerId) vu côté serveur est 428193746, qui désigne le client distant. L'identifiant vu côté client est 1, qui désigne le serveur.
+Machines : Une seule machine utilisée pour le test local, avec l'adresse IP de boucle locale 127.0.0.1 employée à la fois pour le serveur et le client.

@@ -1,0 +1,4 @@
+Constat : Le programme se fige complètement (interblocage), aucun message de fin ne s'affiche et l'exécution reste bloquée indéfiniment.
+Pause : Fil A bloqué à la ligne 11 en attendant m2 ; Fil B bloqué à la ligne 18 en attendant m1.
+Correction : Modification de l'ordre d'acquisition des verrous pour que les deux fils prennent les mutex dans le même ordre séquentiel (m1 puis m2), éliminant ainsi la condition d'attente circulaire.
+Règle : Pour éviter les interblocages (deadlocks) dans un programme, tous les threads doivent toujours acquérir les ressources (mutex) dans le même ordre global et prédéfini.

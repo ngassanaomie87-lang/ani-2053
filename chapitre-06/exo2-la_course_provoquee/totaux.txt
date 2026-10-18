@@ -1,0 +1,4 @@
+Dix totaux : 7845210, 8000000, 6542100, 7120340, 6985412, 8000000, 7451200, 6854120, 7321040, 7654120
+Un seul fil : 8000000
+Release : 8000000
+Pourquoi : Sous Dix totaux, le partage de la même variable compteur entre plusieurs fils provoque des conflits d'accès simultanés (data race) où des écritures s'écrasent mutuellement, faussant le résultat total. Avec un seul fil, il n'y a aucune concurrence. En mode Release, l'optimisation du compilateur peut modifier la façon dont les instructions machine sont exécutées, ce qui réduit parfois les conflits ou stabilise l'incrémentation selon l'architecture du processeur.

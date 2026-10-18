@@ -1,4 +1,9 @@
 
 Explication du resultat:
-Le constat : l’on remarque que le dossier ⁠.git⁠ a très peu grossi (il n'a augmenté que de quelques kilo-octets, voire moins).
+ je commence par créer unr deuxième branche avec la commande :
+ ```
+it switch -c test               
+Switched to a new branch 'test'
+ ```
+ Le constat : l’on remarque que le dossier ⁠.git⁠ a très peu grossi (il n'a augmenté que de quelques kilo-octets, voire moins).
 L'explication : Contrairement à un système de sauvegarde classique qui copierait tout le dossier du projet à chaque modification, Git fonctionne par instantanés (snapshots) et par compression d'objets. Il n'enregistre que les différences (deltas) et les modifications textuelles exactes apportées aux fichiers, stockées sous forme d'objets compressés dans la base de données de Git. C'est pour cela que même avec plusieurs commits, l'impact sur le disque est minime. 

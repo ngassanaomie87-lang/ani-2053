@@ -1,0 +1,2 @@
+Conclusion :
+Même si un fichier volumineux (comme un fichier de 10 Mo) est supprimé ou retiré au commit suivant, la taille totale du dossier ⁠.git⁠ ne diminue pas. Cela démontre que Git conserve l'historique complet de tous les objets et modifications dans sa base de données interne. Pour purger définitivement un fichier lourd de l'historique et alléger le dépôt, de simples commandes de suppression ne suffisent pas ; il faut recourir à des outils de nettoyage d'historique (comme ⁠git filter-repo⁠ ou ⁠BFG Repo-Cleaner⁠).

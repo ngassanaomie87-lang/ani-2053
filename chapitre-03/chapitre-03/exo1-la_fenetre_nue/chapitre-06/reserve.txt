@@ -1,0 +1,5 @@
+Tâche Réserve : 18 ms, 19 ms, 17 ms
+Fils : 345 ms, 360 ms, 350 ms
+Ouvriers : 8
+Tâche longue : 1650 ms, 1640 ms
+Pourquoi : La réserve de fils (thread pool) est nettement plus rapide pour les tâches courtes car elle réutilise des fils d'exécution déjà existants, évitant ainsi le coût système lourd et répété de la création de 200 fils à la main. Lorsque la tâche devient cent fois plus longue, le temps de calcul effectif prend le dessus sur le coût de création initial des fils, ce qui rend l'overhead de création négligeable et réduit considérablement l'écart de performance entre les deux méthodes.

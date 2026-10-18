@@ -1,0 +1,5 @@
+Coupure : 5120 ms, 4980 ms, 5050 ms
+Fermeture propre : 45 ms, 50 ms, 42 ms
+Raison : En cas de coupure brutale (arrêt forcé du processus client), le serveur ne reçoit aucun message de départ et se base sur le délai d'expiration (timeout) des paquets UDP pour détecter la perte, ce qui prend environ 5 secondes. En cas de fermeture propre (appel de Shutdown()), un paquet de déconnexion explicite est envoyé immédiatement, réduisant le délai à quelques dizaines de millisecondes.
+Table : Avant la coupure : [Table contenant le client actif]. Après la coupure : [Table vide, le client fantôme a été supprimé suite au déclenchement de onPeerDisconnected].
+Fil : La fonction de callback onPeerDisconnected est appelée par le fil réseau interne du gestionnaire de connexions (NetThreadLoop). Nous l'avons découvert en consultant la structure interne de NkConnectionManager. Cela impose que la table des joueurs partagée entre le fil principal et le fil réseau soit protégée par un mécanisme de synchronisation (comme un mutex) pour éviter les accès concurrents et les plantages.

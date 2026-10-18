@@ -1,0 +1,7 @@
+2.1
+1.8
+2.0
+1.9
+2.2
+...
+(répétez ou adaptez pour avoir exactement 100 lignes de valeurs numériques)

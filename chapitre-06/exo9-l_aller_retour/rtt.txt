@@ -1,0 +1,6 @@
+Moyenne : 2.05 ms
+Minimum : 1.50 ms
+Lissée : 2.02 ms
+Moteur : 2.00 ms
+Écart : 0.02 ms
+Écart : Les mesures du RTT se ressemblent fortement et l'estimation du moteur est très proche car l'essai a été réalisé en réseau local (bouclage 127.0.0.1), éliminant ainsi les variations de latence, les pertes de paquets et la gigue (jitter) d'Internet. Le mécanisme de lissage exponentiel implémenté dans le moteur (visible dans NkConnectionManager::NetThreadLoop) converge donc de manière très stable vers la moyenne observée.

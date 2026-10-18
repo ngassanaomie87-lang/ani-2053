@@ -1,0 +1,4 @@
+Types complets : 21 octets
+Quantifié : 11 octets
+Écart maximal : État : 0, Numéro : 0, Position X : 0.005 m, Position Y : 0.005 m, Angle : 0.25°, Santé : 0
+Ce que le joueur verrait : Si ces infimes écarts dus à la quantification (de l'ordre du centimètre pour la position et du demi-degré pour l'angle) survenaient en jeu, ils seraient totalement imperceptibles à l'œil nu pour un joueur humain. En contrepartie, la réduction drastique de la taille des paquets réseaux améliore considérablement la bande passante et la fluidité globale du multijoueur.

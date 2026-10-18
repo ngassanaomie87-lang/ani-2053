@@ -1,0 +1,4 @@
+Image : grande-photo.png 4.5 Mo 1450 ms
+Get : 1452 ms 1
+IsReady : 12 ms 120
+Ce qu'on voit : Dans la version Get, la fenêtre se fige complètement, le carré s'arrête net pendant toute la durée du chargement lourd de l'image. Dans la version IsReady, le carré continue de se déplacer de manière fluide et ininterrompue à 60 images par seconde pendant que l'image se charge en arrière-plan dans le pool de fils.

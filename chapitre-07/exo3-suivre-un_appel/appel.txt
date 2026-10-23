@@ -1,0 +1,13 @@
+Les sauts :
+1. NkCanvasApp::OnRender appelle target.Clear(couleur) dans modules/app/include/NkCanvasApp.h.
+2. NkRenderWindow::Clear appelle le gestionnaire graphique sous-jacent dans modules/window/include/NkRenderWindow.h.
+3. L'API OpenGL / SDL effectue le nettoyage effectif du tampon d'affichage matériel.
+
+Arrêt :
+glClearColor et glClear (fonctions de la bibliothèque OpenGL / Glad).
+
+Pourquoi là :
+On s'arrête ici car on atteint une bibliothèque externe déjà compilée (OpenGL/Glad) et un appel système matériel sur lequel on n'a plus de code source C++ à inspecter dans le kit.
+
+Ce que je sais maintenant :
+Je sais que le nettoyage de l'écran par target.Clear transite par la fenêtre de rendu (NkRenderWindow) avant d'appeler directement les fonctions bas niveau du pilote graphique pour effacer les tampons de couleur.

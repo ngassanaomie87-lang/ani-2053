@@ -1,0 +1,11 @@
+Ce qu'il possède :
+Il possède deux variables membres privées pour gérer les transformations géométriques : une matrice de transformation 2D/3D (m_matrix) et son inverse mis en cache (m_inverseMatrix).
+
+Qui l'appelle :
+Le fichier est appelé par l'en-tête include/NKCanvas/Renderer/Core/NkRenderStates.h ainsi que par NkCanvas.h.
+
+Ce qu'il promet :
+Il promet d'appliquer des transformations géométriques (translater, tourner, changer l'échelle), de combiner plusieurs transformations entre elles et de convertir des points entre différents repères de coordonnées.
+
+Ce que je n'ai pas lu :
+Je n'ai pas eu besoin d'ouvrir l'implémentation (.cpp), le corps des méthodes de calcul matriciel, ni les détails des opérations d'algèbre linéaire sous-jacentes.

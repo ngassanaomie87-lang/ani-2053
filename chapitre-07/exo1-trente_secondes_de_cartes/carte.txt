@@ -1,0 +1,10 @@
+Module : NKImage
+
+D'après le projet :
+D'après ses dépendances directes (notamment NKFileSystem et NKGlad), ce module gère le chargement, le décodage et la manipulation des fichiers d'images depuis le disque pour les préparer au rendu. Il ne s'occupe ni du réseau, ni du son, ni de la logique d'interface.
+
+Après l'en-tête :
+Le fichier se trouve dans modules/image/include/NKImage.h et expose les structures de données de pixels, les formats de texture ainsi que les fonctions de lecture de fichiers graphiques.
+
+Mes erreurs :
+Je pensais que ce module gérait également l'affichage direct des textures à l'écran, alors qu'il se limite strictement au traitement et au stockage des données d'images en mémoire, déléguant le dessin au module graphique.

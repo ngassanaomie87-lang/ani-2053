@@ -1,0 +1,11 @@
+Le long :
+include/NKCanvas/Renderer/Core/NkRenderer2D.h (1250 lignes)
+
+Le difficile :
+include/NKCanvas/Renderer/Core/NkRenderStates.h (185 lignes)
+
+Ce qu'ils gardent :
+Le fichier long gère une structure séquentielle de données de sommets et de buffers graphiques simples avec peu d'imbrications. Le fichier difficile gère des états de rendu complexes, des matrices de transformation et des liaisons polymorphes fortement couplées à de multiples dépendances croisées.
+
+L'écart :
+Le fichier long se lit facilement malgré sa taille car il ne contient que des déclarations de données linéaires sans logique cachée. Le fichier court résiste car il condense un grand nombre de variables d'état modifiées et appelées depuis de multiples endroits différents à travers le kit, ce qui multiplie la charge cognitive par ligne.

@@ -1,0 +1,11 @@
+Les couches :
+1. Système d'exploitation Windows : réception du message WM_KEYDOWN lié au matériel clavier.
+2. Couche fenêtre native : interception par la boucle de messages de la classe NkWindow.
+3. Couche gestion des événements : dispatching via le module NkEvent.
+4. Couche application : réception finale dans la méthode OnKeyPressed de NkCanvasApp.
+
+Où je me suis arrêté :
+Je me suis arrêté au niveau de la boucle de messages interne de la bibliothèque SDL/Windows de bas niveau, car le code source exact de la boucle d'interception du système d'exploitation est masqué dans des bibliothèques binaires pré-compilées.
+
+Combien :
+4 couches identifiées au total dans l'architecture logicielle, et j'en ai vu 3 traverser activement les en-têtes du kit lors du traçage des événements.

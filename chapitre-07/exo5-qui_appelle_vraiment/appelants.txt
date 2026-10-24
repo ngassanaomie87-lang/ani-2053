@@ -1,0 +1,13 @@
+Par le texte :
+Commande : grep -rn "Draw" include/
+Liste obtenue : La recherche textuelle brute retrouve toutes les occurrences textuelles du nom de méthode "Draw" dans les en-têtes, incluant la méthode virtuelle de la classe de base NkDrawable ainsi que diverses surcharges d'interface non liées au contexte d'exécution actuel.
+
+Par la pile :
+Geste / Point d'arrêt : Pose d'un point d'arrêt à l'intérieur de la méthode Draw redéfinie dans MonObjetDessinable, puis lancement du débogueur lors de l'appel effectif de target.Draw(m_objet).
+Liste obtenue : La pile d'appels au premier arrêt montre précisément le flux d'exécution réel : 
+1. MonAppliAppelants::OnRender appelle target.Draw(objet).
+2. NkRenderTarget::Draw dispatche l'appel polymorphe.
+3. MonObjetDessinable::Draw s'exécute effectivement.
+
+Les différences :
+La recherche textuelle liste tous les symboles statiques du code sans distinction de contexte ni de polymorphisme, tandis que la pile d'appels révèle le chemin d'exécution réel emprunté dynamiquement à l'exécution. Cette différence existe car une méthode virtuelle est résolue par liaison dynamique (table des fonctions virtuelles vtable) au moment de l'appel, ce qu'une recherche textuelle textuelle statique ne peut pas deviner.

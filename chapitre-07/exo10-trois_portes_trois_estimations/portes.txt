@@ -1,0 +1,14 @@
+Module :
+modules/window
+
+Après le projet :
+D'après le fichier de description et les dépendances du projet, le module semble se charger de l'initialisation de la fenêtre native et de la gestion de la boucle d'affichage principale.
+
+Après un programme :
+L'analyse du programme d'exemple montre que le module gère également la création des contextes graphiques et la liaison avec les événements de la plateforme hôte.
+
+Après les en-têtes :
+La lecture des en-têtes confirme que le module structure proprement la création de la fenêtre, l'encapsulation des surfaces de rendu et l'interception des signaux bas niveau de l'OS.
+
+L'écart :
+Chaque porte a corrigé et affiné l'estimation initiale en révélant que la gestion de la fenêtre est découplée en sous-composants modulaires indépendants plutôt qu'en un bloc monolithique unique.

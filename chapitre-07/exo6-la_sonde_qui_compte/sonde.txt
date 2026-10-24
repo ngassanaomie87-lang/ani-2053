@@ -1,0 +1,11 @@
+Plafond 60 :
+Compte obtenu : environ 600 passages pour une durée de 10.0 secondes avec la cadence par défaut fixée à 60 images par seconde.
+
+Sans plafond :
+Compte obtenu : un nombre nettement supérieur de passages (plusieurs milliers), la boucle s'exécutant à la vitesse maximale permise par le processeur et la carte graphique sans être bridée.
+
+Sans la ligne :
+Compte obtenu : des variations infimes dans la régularité de la boucle, montrant que l'affichage de la ligne de journal (I/O console) consomme un léger temps de calcul qui impacte marginalement les performances globales.
+
+Les écarts :
+L'écart entre chaque compte et ce que la boucle promet s'explique par la synchronisation verticale (V-Sync) et le temps de traitement effectif du rendu de chaque image par le système. L'effet de la ligne de journal est d'introduire une légère latence d'affichage (overhead d'E/S standard), ralentissant subtilement le nombre total d'itérations par seconde comparé à l'exécution sans journalisation.

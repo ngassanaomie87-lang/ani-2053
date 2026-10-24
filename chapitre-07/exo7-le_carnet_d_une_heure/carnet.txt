@@ -1,0 +1,14 @@
+Question :
+Où est initialisée et configurée la taille par défaut de la fenêtre de rendu graphique au démarrage du kit ? Date : 24 octobre 2026, de 19h00 à 20h00.
+
+Les endroits :
+modules/window/include/NkRenderWindow.h dans la classe NkRenderWindow et sa méthode de configuration initiale.
+
+Les surprises :
+La gestion de la taille ne se fait pas directement dans la boucle principale de l'application, mais est déléguée à un module de gestion de fenêtre indépendant sous-jacent.
+
+Les questions ouvertes :
+Comment la fenêtre réagit-elle dynamiquement aux événements de redimensionnement de l'OS ? (Date : 24 octobre 2026).
+
+Les mensonges :
+Le commentaire dans l'en-tête de configuration prétend que la résolution par défaut est fixée à 1280x720 pixels, alors que le code initialise explicitement la structure avec des valeurs différentes.

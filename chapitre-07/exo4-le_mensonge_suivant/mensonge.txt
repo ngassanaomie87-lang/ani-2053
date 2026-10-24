@@ -1,0 +1,11 @@
+Le commentaire :
+Le commentaire situé dans modules/renderer/include/NkRenderStates.h indique que l'état de rendu gère par défaut le mélange alpha (blending) activé en permanence pour toutes les textures 2D.
+
+Le code :
+Le code effectif de la classe NkRenderStates désactive explicitement cette option dans son constructeur par défaut via m_blendEnabled = false;.
+
+La preuve :
+La lecture de la structure dans modules/renderer/include/NkRenderStates.h et l'initialisation dans modules/renderer/src/NkRenderStates.cpp montrent clairement la contradiction entre la documentation textuelle obsolète et l'état réel de la variable.
+
+Ce qu'il dit de son auteur :
+Celui qui l'a écrit a sans doute copié un ancien comportement hérité d'une version précédente du moteur graphique sans actualiser le commentaire après avoir modifié la logique par défaut dans le code source, ce qui révèle une zone du code qui a évolué plus vite que sa documentation.

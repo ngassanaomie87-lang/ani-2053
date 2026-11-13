@@ -1,0 +1,5 @@
+Le signe que j'ai changé : dans la copie de NkRefView.h, j'ai remplacé par + le signe - de la formule qui recalcule center.x dans ZoomAtPixel.
+
+Le test qui est tombé : point_fixe, car le centre horizontal est alors recalculé du mauvais côté et le point du monde sous le curseur ne reste plus à la même place.
+
+Un test qui n'a rien vu : bornes est resté OK, car il ne vérifie que les limites de zoom, que ce changement de signe ne modifie pas.

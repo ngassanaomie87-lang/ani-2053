@@ -1,0 +1,4 @@
+Format juste :
+octets : 139, relu : OUI, identiques : OUI
+Format casse :
+octets : 139, relu : OUI, identiques : NON

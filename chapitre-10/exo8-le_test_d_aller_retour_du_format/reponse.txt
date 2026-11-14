@@ -1,0 +1,8 @@
+La ligne que j'ai changée :
+Dans la copie de NkRefFile.h, j'ai remplacé PutF32(out, view.center.x); par PutF32(out, view.center.x + 1.0f);. La première écriture ajoute 1 à la coordonnée x de la vue ; après lecture, la seconde écriture l'ajoute encore, donc les octets diffèrent.
+
+Ce que le test a vu :
+La désérialisation réussit, mais la comparaison octet par octet échoue après la modification. Avec le format intact, les deux écritures produisent 139 octets identiques.
+
+Ce que le test ne voit pas :
+Le format ne sérialise pas le champ selected. Si selected change entre l'écriture et la relecture, ce test peut quand même réussir, car ce champ n'est présent dans aucune des deux suites d'octets. Il ne prouve donc pas que tous les champs du modèle sont conservés.

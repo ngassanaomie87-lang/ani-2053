@@ -1,130 +1,187 @@
 #include <algorithm>
 #include <iostream>
-#include <sstream>
+#include <set>
 #include <string>
 #include <vector>
 
 using namespace std;
 
-static bool contient(const string& ligne, const string& nom) {
-    istringstream flux(ligne);
-    string mot;
-    while (flux >> mot) {
-        if (mot == nom) {
-            return true;
-        }
+struct Image {
+    string nom;
+    bool choisie = false;
+};
+
+struct Conception {
+    vector<Image> planche;
+    set<size_t> selectionParIndex;
+    set<string> selectionParId;
+};
+
+static void afficherListe(const vector<string>& noms) {
+    if (noms.empty()) {
+        cout << " AUCUN";
+        return;
     }
-    return false;
+
+    for (const string& nom : noms) {
+        cout << ' ' << nom;
+    }
 }
 
-static void echanger(vector<string>& tableau, size_t i, size_t j) {
-    if (i < tableau.size() && j < tableau.size()) {
-        swap(tableau[i], tableau[j]);
+static vector<string> nomsPlanche(const Conception& conception) {
+    vector<string> noms;
+    noms.reserve(conception.planche.size());
+    for (const Image& image : conception.planche) {
+        noms.push_back(image.nom);
     }
+    return noms;
+}
+
+static vector<string> nomsSelection(const Conception& conception, int type) {
+    vector<string> noms;
+    for (size_t i = 0; i < conception.planche.size(); ++i) {
+        bool choisie = false;
+        if (type == 0) {
+            choisie = conception.planche[i].choisie;
+        } else if (type == 1) {
+            choisie = conception.selectionParIndex.count(i) != 0;
+        } else {
+            choisie = conception.selectionParId.count(conception.planche[i].nom) != 0;
+        }
+
+        if (choisie) {
+            noms.push_back(conception.planche[i].nom);
+        }
+    }
+    return noms;
+}
+
+static void afficherConception(const string& nom, const Conception& conception, int type) {
+    cout << nom << " PLANCHE";
+    afficherListe(nomsPlanche(conception));
+    cout << '\n';
+    cout << nom << " SELECTION";
+    afficherListe(nomsSelection(conception, type));
+    cout << '\n';
+}
+
+static bool identique(const Conception& gauche, int typeGauche,
+                      const Conception& droite, int typeDroite) {
+    return nomsPlanche(gauche) == nomsPlanche(droite) &&
+           nomsSelection(gauche, typeGauche) == nomsSelection(droite, typeDroite);
+}
+
+static void cliquer(Conception& conception, int type, long long indice, bool ajouter) {
+    if (!ajouter) {
+        if (type == 0) {
+            for (Image& image : conception.planche) {
+                image.choisie = false;
+            }
+        } else if (type == 1) {
+            conception.selectionParIndex.clear();
+        } else {
+            conception.selectionParId.clear();
+        }
+    }
+
+    if (indice < 0 || static_cast<size_t>(indice) >= conception.planche.size()) {
+        return;
+    }
+
+    const size_t index = static_cast<size_t>(indice);
+    if (type == 0) {
+        conception.planche[index].choisie = true;
+    } else if (type == 1) {
+        conception.selectionParIndex.insert(index);
+    } else {
+        conception.selectionParId.insert(conception.planche[index].nom);
+    }
+}
+
+static void supprimerSelection(Conception& conception, int type) {
+    vector<Image> restantes;
+    restantes.reserve(conception.planche.size());
+    for (size_t i = 0; i < conception.planche.size(); ++i) {
+        bool choisie = false;
+        if (type == 0) {
+            choisie = conception.planche[i].choisie;
+        } else if (type == 1) {
+            choisie = conception.selectionParIndex.count(i) != 0;
+        } else {
+            choisie = conception.selectionParId.count(conception.planche[i].nom) != 0;
+        }
+        if (!choisie) {
+            restantes.push_back(conception.planche[i]);
+        }
+    }
+    conception.planche.swap(restantes);
+    conception.selectionParIndex.clear();
+    conception.selectionParId.clear();
 }
 
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
 
-    string ligneAjout;
-    string ligneSuppression;
-    string ligneEchange;
-    getline(cin, ligneAjout);
-    getline(cin, ligneSuppression);
-    getline(cin, ligneEchange);
-
-    const bool ajouteTextures = contient(ligneAjout, "textures");
-    const bool ajouteSources = contient(ligneAjout, "sources");
-    const bool supprimeTextures = contient(ligneSuppression, "textures");
-    const bool supprimeSources = contient(ligneSuppression, "sources");
-    const bool echangeTextures = contient(ligneEchange, "textures");
-    const bool echangeSources = contient(ligneEchange, "sources");
-
-    int nombreOperations = 0;
-    cin >> nombreOperations;
-
-    vector<string> modele;
-    vector<string> textures;
-    vector<string> sources;
-
-    for (int operation = 0; operation < nombreOperations; ++operation) {
-        string type;
-        cin >> type;
-
-        if (type == "AJOUTE") {
+    Conception conceptions[3];
+    string operation;
+    while (cin >> operation) {
+        if (operation == "AJOUTE") {
             string nom;
             cin >> nom;
-            modele.push_back(nom);
-            if (ajouteTextures) {
-                textures.push_back(nom);
+            for (Conception& conception : conceptions) {
+                conception.planche.push_back({nom, false});
             }
-            if (ajouteSources) {
-                sources.push_back(nom);
-            }
-        } else if (type == "SUPPRIME") {
-            int nombreIndices = 0;
-            cin >> nombreIndices;
-            vector<size_t> indices(static_cast<size_t>(nombreIndices));
-            for (size_t& indice : indices) {
-                cin >> indice;
-            }
-
-            sort(indices.rbegin(), indices.rend());
-            for (size_t indice : indices) {
-                if (indice < modele.size()) {
-                    modele.erase(modele.begin() + static_cast<ptrdiff_t>(indice));
-                }
-                if (supprimeTextures && indice < textures.size()) {
-                    textures.erase(textures.begin() + static_cast<ptrdiff_t>(indice));
-                }
-                if (supprimeSources && indice < sources.size()) {
-                    sources.erase(sources.begin() + static_cast<ptrdiff_t>(indice));
-                }
-            }
-        } else if (type == "MONTE" || type == "DESCEND") {
-            size_t indice = 0;
+        } else if (operation == "CLIC" || operation == "AJOUTE_SEL") {
+            long long indice = 0;
             cin >> indice;
-
-            if (type == "MONTE") {
-                if (indice + 1 < modele.size()) {
-                    swap(modele[indice], modele[indice + 1]);
-                    if (echangeTextures) {
-                        echanger(textures, indice, indice + 1);
-                    }
-                    if (echangeSources) {
-                        echanger(sources, indice, indice + 1);
-                    }
+            const bool ajouter = operation == "AJOUTE_SEL";
+            for (int type = 0; type < 3; ++type) {
+                cliquer(conceptions[type], type, indice, ajouter);
+            }
+        } else if (operation == "ECHANGE") {
+            long long i = 0;
+            long long j = 0;
+            cin >> i >> j;
+            for (Conception& conception : conceptions) {
+                if (i >= 0 && j >= 0 &&
+                    static_cast<size_t>(i) < conception.planche.size() &&
+                    static_cast<size_t>(j) < conception.planche.size()) {
+                    swap(conception.planche[static_cast<size_t>(i)],
+                         conception.planche[static_cast<size_t>(j)]);
                 }
-            } else if (indice > 0) {
-                swap(modele[indice], modele[indice - 1]);
-                if (echangeTextures) {
-                    echanger(textures, indice, indice - 1);
+            }
+        } else if (operation == "RETIRE") {
+            long long indice = 0;
+            cin >> indice;
+            for (Conception& conception : conceptions) {
+                if (indice >= 0 && static_cast<size_t>(indice) < conception.planche.size()) {
+                    conception.planche.erase(conception.planche.begin() + indice);
                 }
-                if (echangeSources) {
-                    echanger(sources, indice, indice - 1);
-                }
+            }
+        } else if (operation == "SUPPRIME") {
+            for (int type = 0; type < 3; ++type) {
+                supprimerSelection(conceptions[type], type);
             }
         }
     }
 
-    const size_t longueur = max(modele.size(), max(textures.size(), sources.size()));
-    size_t decales = 0;
-    for (size_t i = 0; i < longueur; ++i) {
-        const bool aModele = i < modele.size();
-        const bool aTextures = i < textures.size();
-        const bool aSources = i < sources.size();
-        const string nomModele = aModele ? modele[i] : "-";
-        const string nomTextures = aTextures ? textures[i] : "-";
-        const string nomSources = aSources ? sources[i] : "-";
+    afficherConception("DANS_ITEM", conceptions[0], 0);
+    afficherConception("PAR_INDEX", conceptions[1], 1);
+    afficherConception("PAR_ID", conceptions[2], 2);
 
-        cout << i << ' ' << nomModele << ' ' << nomTextures << ' ' << nomSources << '\n';
-        if (!aModele || !aTextures || !aSources ||
-            nomModele != nomTextures || nomModele != nomSources) {
-            ++decales;
+    cout << "FAUX";
+    bool auMoinsUneFausse = false;
+    for (int type = 1; type < 3; ++type) {
+        if (!identique(conceptions[0], 0, conceptions[type], type)) {
+            cout << ' ' << (type == 1 ? "PAR_INDEX" : "PAR_ID");
+            auMoinsUneFausse = true;
         }
     }
+    if (!auMoinsUneFausse) {
+        cout << " AUCUN";
+    }
+    cout << '\n';
 
-    cout << "DECALES " << decales << '\n';
     return 0;
 }

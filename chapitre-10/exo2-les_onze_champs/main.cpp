@@ -52,4 +52,8 @@ int main() {
 	std::cout << "RESTENT " << restored << '\n';
 	std::cout << "CHANGES " << changes << '\n';
 	return 0;
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 40e4e2fcd5229bbe063c38391e5e8376e30fb841

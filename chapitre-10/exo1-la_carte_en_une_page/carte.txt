@@ -1,0 +1,5 @@
+fichier : NkRefView.h, lignes : 86, inclut : NKMath/NKMath.h
+fichier : NkRefBoard.h, lignes : 371, inclut : NKMath/NKMath.h NKContainers/Sequential/NkVector.h NKContainers/String/NkString.h
+fichier : NkRefFile.h, lignes : 224, inclut : NKContainers/Sequential/NkVector.h NkRef/NkRefBoard.h NkRef/NkRefView.h
+fichier : main.cpp, lignes : 1977, inclut : NKWindow/NKWindow.h NKWindow/NKMain.h NKEvent/NkEvent.h NKEvent/NkWindowEvent.h NKEvent/NkMouseEvent.h NKEvent/NkKeyboardEvent.h NKEvent/NkDropEvent.h NKLogger/NkLog.h NKTime/NkTime.h NKCanvas/Renderer/Targets/NkRenderWindow.h NKCanvas/Core/NkContextDesc.h NKCanvas/Core/NkGraphicsApi.h NKCanvas/Renderer/Resources/NkTexture.h NKCanvas/Renderer/Resources/NkSprite.h NKCanvas/Renderer/Resources/NkFont.h NKFileSystem/NkDirectory.h NKFileSystem/NkFile.h NKImage/NKImage.h windows.h NKGui/NKGui.h NKCanvas/UI/NkGuiCanvasBackend.h NKMemory/NkUniquePtr.h NKTime/NkClock.h NKWindow/Core/NkDialogs.h NKCore/NkTraits.h NkRef/NkRefView.h NkRef/NkRefBoard.h NkRef/NkRefFile.h cstdio cstdlib cstring
+commit : 987304dae

@@ -192,3 +192,10 @@ int main() {
     } catch (const string& e) {
         if (e == "TRONQUE") {
             cout << "TRONQUE\n";
+                    } else {
+            cout << e << '\n';
+        }
+    }
+
+    return 0;
+}

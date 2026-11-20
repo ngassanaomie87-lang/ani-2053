@@ -87,3 +87,4 @@ int main() {
     cout << "PART_OUBLIEE " << partOubliee << '\n';
 
     return 0;
+}

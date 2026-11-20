@@ -1,0 +1,44 @@
+commit : 987304dae
+
+Les miroirs :
+git grep -n GetFlipX -- Kernel
+Kernel/Runtime/NKCanvas/src/NKCanvas/Renderer/Batch/NkBatchRenderer2D.cpp:479:			if (sprite.GetFlipX()) {
+Kernel/Runtime/NKCanvas/src/NKCanvas/Renderer/Resources/NkSprite.cpp:51:		bool NkSprite::GetFlipX() const {
+Kernel/Runtime/NKCanvas/src/NKCanvas/Renderer/Resources/NkSprite.h:82:				bool GetFlipX() const;
+
+Membre 1 :
+git grep -n -E '\.id\b|->id\b' -- Applications/NkRef/src/NkRef
+Applications/NkRef/src/NkRef/NkRefBoard.h:67:				it.id = mNextId++;
+Applications/NkRef/src/NkRef/NkRefBoard.h:73:				return it.id;
+git grep -n 'board.AddItem' -- Applications/NkRef/src/NkRef/main.cpp
+Applications/NkRef/src/NkRef/main.cpp:624:		board.AddItem(world, w, h, NkString(path));
+Applications/NkRef/src/NkRef/main.cpp:666:		board.AddItem(world, clip.width, clip.height, NkString());
+
+Membre 2 :
+git grep -n 'sourcePath' -- Applications/NkRef/src/NkRef
+Applications/NkRef/src/NkRef/NkRefBoard.h:44:			NkString sourcePath; ///< vide = collée du presse-papiers (Étape 2 : octets embarqués)
+Applications/NkRef/src/NkRef/NkRefBoard.h:65:			uint32 AddItem(const NkVec2f &worldPos, uint32 texW, uint32 texH, const NkString &sourcePath) {
+Applications/NkRef/src/NkRef/NkRefBoard.h:71:				it.sourcePath = sourcePath;
+git grep -n -E 'images\[i\]\.data|images\[i\]\.size|li\.src' -- Applications/NkRef/src/NkRef/NkRefFile.h
+Applications/NkRef/src/NkRef/NkRefFile.h:129:			PutU32(out, (uint32)images[i].size);
+Applications/NkRef/src/NkRef/NkRefFile.h:130:			PutBytes(out, images[i].data, images[i].size);
+Applications/NkRef/src/NkRef/NkRefFile.h:195:			li.src.Resize(len);
+Applications/NkRef/src/NkRef/NkRefFile.h:196:			r.Get(li.src.Data(), len);
+
+Membre 3 :
+git grep -n 'mWrap' -- Kernel/Runtime/NKCanvas/src/NKCanvas/Renderer/Resources
+Kernel/Runtime/NKCanvas/src/NKCanvas/Renderer/Resources/NkTexture.cpp:31:			  mFilter(other.mFilter), mWrap(other.mWrap), mRenderer(other.mRenderer),
+Kernel/Runtime/NKCanvas/src/NKCanvas/Renderer/Resources/NkTexture.cpp:47:				mWrap = other.mWrap;
+Kernel/Runtime/NKCanvas/src/NKCanvas/Renderer/Resources/NkTexture.cpp:214:			mWrap = wrap;
+Kernel/Runtime/NKCanvas/src/NKCanvas/Renderer/Resources/NkTexture.h:77:					return mWrap;
+Kernel/Runtime/NKCanvas/src/NKCanvas/Renderer/Resources/NkTexture.h:139:				NkTextureWrap mWrap = NkTextureWrap::NK_CLAMP;
+git grep -n 'GetWrap(' -- Kernel/Runtime/NKCanvas
+Kernel/Runtime/NKCanvas/src/NKCanvas/Renderer/Resources/NkTexture.h:76:				NkTextureWrap GetWrap() const {
+git grep -n -E 'mGPUId = gTextureBackend.Create|void NkTexture::SetWrap|gTextureBackend.SetWrap' -- Kernel/Runtime/NKCanvas/src/NKCanvas/Renderer/Resources/NkTexture.cpp
+Kernel/Runtime/NKCanvas/src/NKCanvas/Renderer/Resources/NkTexture.cpp:163:			mGPUId = gTextureBackend.Create(mWidth, mHeight, image.Pixels());
+Kernel/Runtime/NKCanvas/src/NKCanvas/Renderer/Resources/NkTexture.cpp:213:		void NkTexture::SetWrap(NkTextureWrap wrap) {
+Kernel/Runtime/NKCanvas/src/NKCanvas/Renderer/Resources/NkTexture.cpp:215:			if (mGPUId && gTextureBackend.SetWrap)
+Kernel/Runtime/NKCanvas/src/NKCanvas/Renderer/Resources/NkTexture.cpp:216:				gTextureBackend.SetWrap(mGPUId, wrap);
+git grep -n -E 'Create\)\(|void \(\*Create|SetWrap\)' -- Kernel/Runtime/NKCanvas/src/NKCanvas/Renderer/Resources/NkTextureBackend.h
+Kernel/Runtime/NKCanvas/src/NKCanvas/Renderer/Resources/NkTextureBackend.h:43:				uint32 (*Create)(uint32 w, uint32 h, const uint8 *rgba) = nullptr;
+Kernel/Runtime/NKCanvas/src/NKCanvas/Renderer/Resources/NkTextureBackend.h:47:				void (*SetWrap)(uint32 id, NkTextureWrap w) = nullptr;

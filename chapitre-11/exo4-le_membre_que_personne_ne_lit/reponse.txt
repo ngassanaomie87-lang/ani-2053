@@ -1,0 +1,19 @@
+Membre : NkRefItem::id
+Écrit dans : Applications/NkRef/src/NkRef/NkRefBoard.h:67
+Lu par : NkRefBoard::AddItem le retourne, mais aucun de ses appelants ne récupère le résultat
+Verdict : inutile
+Preuve : AddItem génère l'identifiant puis le retourne, mais les deux appels de main.cpp ignorent ce retour. Aucun code ne peut donc se servir de cet identifiant pour retrouver un item.
+
+Membre : NkRefItem::sourcePath
+Écrit dans : Applications/NkRef/src/NkRef/NkRefBoard.h:71
+Lu par : personne
+Verdict : inutile
+Preuve : Le chemin source n'est jamais relu. Le fichier .nkref embarque les octets de l'image et les restaure depuis ces octets ; il n'a donc pas besoin de ce chemin.
+
+Membre : NkTexture::mWrap
+Écrit dans : Kernel/Runtime/NKCanvas/src/NKCanvas/Renderer/Resources/NkTexture.cpp:214
+Lu par : NkTexture::GetWrap() uniquement, sans appelant trouvé
+Verdict : défaut
+Preuve : SetWrap conserve la valeur et ne la transmet au backend que si la texture possède déjà un identifiant GPU. Si le mode est réglé avant le chargement, la création GPU ne réapplique pas mWrap : l'utilisateur perd le mode de répétition demandé.
+
+Ce que la lecture seule n'aurait pas montré : La lecture de SetWrap seule ne montre pas que l'appel au backend dépend de l'existence préalable de la texture, ni que sa création ne réapplique pas le mode mémorisé. Il faut suivre les références dans tout le dépôt pour voir que les retours des deux AddItem sont ignorés et que GetWrap n'a aucun appelant.

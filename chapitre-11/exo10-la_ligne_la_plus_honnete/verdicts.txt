@@ -1,0 +1,10 @@
+MAINTENANT historique-annulations SUPPOSEE
+MAINTENANT mode-presentation SUPPOSEE
+MAINTENANT raccourcis-personnalisables SUPPOSEE
+DECOUPER annulation-images SUPPOSEE
+DECOUPER recherche-images SUPPOSEE
+DECOUPER import-dossier SUPPOSEE
+DECOUPER annotations-texte SUPPOSEE
+ON_NE_LE_FAIT_PAS export-pdf SUPPOSEE
+ON_NE_LE_FAIT_PAS collaboration-temps-reel SUPPOSEE
+VERDICT HONNETE

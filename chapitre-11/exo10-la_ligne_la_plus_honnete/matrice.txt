@@ -1,0 +1,10 @@
+9
+annulation-images 5 5 SUPPOSEE MANQUE
+mode-presentation 4 2 SUPPOSEE MANQUE
+recherche-images 4 3 SUPPOSEE MANQUE
+import-dossier 4 4 SUPPOSEE MANQUE
+annotations-texte 3 4 SUPPOSEE MANQUE
+export-pdf 2 4 SUPPOSEE MANQUE
+collaboration-temps-reel 2 5 SUPPOSEE MANQUE
+raccourcis-personnalisables 3 2 SUPPOSEE MANQUE
+historique-annulations 1 2 SUPPOSEE SOCLE annulation-images
